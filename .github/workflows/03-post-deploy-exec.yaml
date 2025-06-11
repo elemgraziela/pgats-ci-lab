@@ -5,12 +5,14 @@ name: 'Execução por Deploy'
 
 #regras de disparo (gatilhos/triggers)
 #gatilho de exec manual = workflow_dispatch
+#dento do on vai todos os disparos que precisa 
+#completed quando ele estiver completado ele vai executar o que esta abaixo
 
 on:
   workflow_run:
     workflows: ['Execução Manual']   
     types:
-      - completed    //quando ele estiver completado ele vai executar o que esta abaixo
+      - completed    
 
 #trabalhos/tarefas dentro do pipeline = jobs
 jobs: 

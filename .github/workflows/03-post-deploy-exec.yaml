@@ -8,15 +8,21 @@ name: 'Execução por Deploy'
 
 on:
   workflow_run:
-    workflows: ["Execução Manual"]   //aqui é qual pipeline vc quer monitorar, aqui no caso foi a 01
+    workflows: ['Execução Manual']   
     types:
       - completed    //quando ele estiver completado ele vai executar o que esta abaixo
 
 #trabalhos/tarefas dentro do pipeline = jobs
 jobs: 
   e2e-testes:
+
    #maquina que  job vai executar
-   runs-on: ubuntu-latest
+   runs-on: ubuntu-
+   
+   #condicional - if
+   # `${ expressão }`
+
+   if: ${{ github.event.workflow_run.conclusion == 'sucess'}}
 
    #passos do script de buil
    steps:

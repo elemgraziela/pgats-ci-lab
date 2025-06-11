@@ -5,6 +5,7 @@ name: 'Execução Agendada'
 
 #regras de disparo (gatilhos/triggers)
 #gatilho de exec manual = workflow_dispatch
+# 06**1 é o tempo
 
 on:
   schedule:

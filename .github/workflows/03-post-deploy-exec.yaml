@@ -50,3 +50,9 @@ jobs:
     - name: executando Teste e2e
       run: yarn run e2e
       
+    #rodar gerador de relatorio independente de erro ou sucesso
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with: 
+        name: relatorio
+        path: ./playwright-report

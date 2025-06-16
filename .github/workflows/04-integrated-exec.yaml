@@ -25,13 +25,13 @@ jobs:
   unidade:
     runs-on: ubuntu-latest
     #inpsecao é o nome do job
-    needs: [inspecao]  
+    needs: [inspecao]
 
     steps:
       #clone do projeto
       - uses: actions/checkout@v4
       #instalar yarn
-      - name: Instalando Yarn
+      - name: Instalando yarn
         run: npm install -g Yarn
       #instalar dependencias
       - name: Instalando dependencias

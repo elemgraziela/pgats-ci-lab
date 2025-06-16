@@ -24,6 +24,8 @@ jobs:
 
   unidade:
     runs-on: ubuntu-latest
+    #inpsecao é o nome do job
+    needs: [inspecao]  
 
     steps:
       #clone do projeto
@@ -40,6 +42,7 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
+    needs: [inspecao]
 
     steps:
       #clone do projeto
@@ -75,6 +78,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: [inspecao]
     #neste exemplo ele nao executa um deploy, mas pode tb configurar para fazer deploy
     steps:
       - name: Simulacao do deploy

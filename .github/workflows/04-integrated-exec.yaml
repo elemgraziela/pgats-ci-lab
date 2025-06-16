@@ -2,7 +2,6 @@
 
 name: 'Execução Integrada'
 
-
 on:
   workflow_dispatch:
 
@@ -11,33 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    #clone do projeto
+      #clone do projeto
       - uses: actions/checkout@v4
-    #instalar yarn
+      #instalar yarn
       - name: Instalando Yarn
         run: npm install -g Yarn
-    #instaar dependencias
+      #instaar dependencias
       - name: Instalando dependencias
         run: yarn
-    #checar a padronizacao do codigo usando lint
+      #checar a padronizacao do codigo usando lint
       - name: Checando padronizacao de codigo
         run: yarn lint
-
 
   unidade:
     runs-on: ubuntu-latest
 
-  
     steps:
-    #clone do projeto
+      #clone do projeto
       - uses: actions/checkout@v4
-    #instalar yarn
+      #instalar yarn
       - name: Instalando Yarn
         run: npm install -g Yarn
-    #instalar dependencias
+      #instalar dependencias
       - name: Instalando dependencias
         run: yarn
-    #checar a padronizacao do codigo usando lint
+      #checar a padronizacao do codigo usando lint
       - name: Executando testes de unidade
         run: yarn lint
 
@@ -45,41 +42,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    #clone do projeto
-    - uses: actions/checkout@v4
-    
-    #instalação do node
-    - uses: actions/setup-node@v4
-      with:
-        node-version: latest
-    
-    #instalação do yarn
-    - name: Instalando Yarn
-      run: npm install -g yarn
+      #clone do projeto
+      - uses: actions/checkout@v4
 
-    #instalação da dependencias
-    - name: Instalando dependencias
-      run: yarn
+      #instalação do node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
 
-    #instalação do playwright
-    - name: Instalando playwright
-      run: yarn playwright install
+      #instalação do yarn
+      - name: Instalando yarn
+        run: npm install -g yarn
 
-    #executar os testes e2e
-    - name: executando Teste e2e
-      run: yarn run e2e
+      #instalação da dependencias
+      - name: Instalando dependencias
+        run: yarn
 
-    #rodar gerador de relatorio independente de erro ou sucesso
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with: 
-        name: relatorio
-        path: ./playwright-report
-      
+      #instalação do playwright
+      - name: Instalando playwright
+        run: yarn playwright install
 
-  deploy: 
+      #executar os testes e2e
+      - name: executando Teste e2e
+        run: yarn run e2e
+
+      #rodar gerador de relatorio independente de erro ou sucesso
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: relatorio
+          path: ./playwright-report
+
+  deploy:
     runs-on: ubuntu-latest
-#neste exemplo ele nao executa um deploy, mas pode tb configurar para fazer deploy
+    #neste exemplo ele nao executa um deploy, mas pode tb configurar para fazer deploy
     steps:
       - name: Simulacao do deploy
         run: echo "simulando o deploy com sucesso"

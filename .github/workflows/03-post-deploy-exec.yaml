@@ -5,56 +5,55 @@ name: 'Execução por Deploy'
 
 #regras de disparo (gatilhos/triggers)
 #gatilho de exec manual = workflow_dispatch
-#dento do on vai todos os disparos que precisa 
+#dento do on vai todos os disparos que precisa
 #completed quando ele estiver completado ele vai executar o que esta abaixo
 
 on:
   workflow_run:
-    workflows: ['Execução Manual']   
+    workflows: ['Execução Manual']
     types:
-      - completed    
+      - completed
 
 #trabalhos/tarefas dentro do pipeline = jobs
-jobs: 
+jobs:
   e2e-testes:
+    #maquina que  job vai executar
+    runs-on: ubuntu-
 
-   #maquina que  job vai executar
-   runs-on: ubuntu-
-   
-   #condicional - if
-   # `${ expressão }`
+    #condicional - if
+    # `${ expressão }`
 
-   if: ${{ github.event.workflow_run.conclusion == 'sucess'}}
+    if: ${{ github.event.workflow_run.conclusion == 'sucess'}}
 
-   #passos do script de buil
-   steps:
-    #clone do projeto
-    - uses: actions/checkout@v4
-    
-    #instalação do node
-    - uses: actions/setup-node@v4
-      with:
-        node-version: latest
-    
-    #instalação do yarn
-    - name: Instalando Yarn
-      run: npm install -g yarn
+    #passos do script de buil
+    steps:
+      #clone do projeto
+      - uses: actions/checkout@v4
 
-    #instalação da dependencias
-    - name: Instalando dependencias
-      run: yarn
+      #instalação do node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
 
-    #instalação do playwright
-    - name: Instalando playwright
-      run: yarn playwright install
+      #instalação do yarn
+      - name: Instalando Yarn
+        run: npm install -g yarn
 
-    #executar os testes e2e
-    - name: executando Teste e2e
-      run: yarn run e2e
-      
-    #rodar gerador de relatorio independente de erro ou sucesso
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with: 
-        name: relatorio
-        path: ./playwright-report
+      #instalação da dependencias
+      - name: Instalando dependencias
+        run: yarn
+
+      #instalação do playwright
+      - name: Instalando playwright
+        run: yarn playwright install
+
+      #executar os testes e2e
+      - name: executando Teste e2e
+        run: yarn run e2e
+
+      #rodar gerador de relatorio independente de erro ou sucesso
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: relatorio
+          path: ./playwright-report

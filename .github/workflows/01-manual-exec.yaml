@@ -10,34 +10,33 @@ on:
   workflow_dispatch:
 
 #trabalhos/tarefas dentro do pipeline = jobs
-jobs: 
+jobs:
   e2e-testes:
-   #maquina que  job vai executar
-   runs-on: ubuntu-latest
+    #maquina que  job vai executar
+    runs-on: ubuntu-latest
 
-   #passos do script de buil
-   steps:
-    #clone do projeto
-    - uses: actions/checkout@v4
-    
-    #instalação do node
-    - uses: actions/setup-node@v4
-      with:
-        node-version: latest
-    
-    #instalação do yarn
-    - name: Instalando Yarn
-      run: npm install -g yarn
+    #passos do script de buil
+    steps:
+      #clone do projeto
+      - uses: actions/checkout@v4
 
-    #instalação da dependencias
-    - name: Instalando dependencias
-      run: yarn
+      #instalação do node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
 
-    #instalação do playwright
-    - name: Instalando playwright
-      run: yarn playwright install
+      #instalação do yarn
+      - name: Instalando Yarn
+        run: npm install -g yarn
 
-    #executar os testes e2e
-    - name: executando Teste e2e
-      run: yarn run e2e
-      
+      #instalação da dependencias
+      - name: Instalando dependencias
+        run: yarn
+
+      #instalação do playwright
+      - name: Instalando playwright
+        run: yarn playwright install
+
+      #executar os testes e2e
+      - name: executando Teste e2e
+        run: yarn run e2e

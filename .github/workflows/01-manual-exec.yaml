@@ -26,7 +26,7 @@ jobs:
           node-version: latest
 
       #instalação do yarn
-      - name: Instalando Yarn
+      - name: Instalando yarn
         run: npm install -g yarn
 
       #instalação da dependencias
